@@ -1,0 +1,26 @@
+{
+  "name": "prompt-vault-ai-root",
+  "version": "1.0.0",
+  "description": "Prompt Vault AI - MERN Stack SaaS Application",
+  "scripts": {
+    "install:backend": "npm --prefix backend install",
+    "install:frontend": "npm --prefix frontend install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "start:backend": "npm --prefix backend start",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "test:backend": "npm --prefix backend test"
+  },
+  "keywords": [
+    "mern",
+    "prompt-vault",
+    "ai",
+    "react",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "ISC"
+}
+
