@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { getJwtSecret } = require('../config/jwt');
 
 const protect = async (req, res, next) => {
   let token;
@@ -13,8 +14,7 @@ const protect = async (req, res, next) => {
       token = req.headers.authorization.split(' ')[1];
 
       // Verify token
-      const jwtSecret = process.env.JWT_SECRET || 'prompt_vault_ai_fallback_secret_key_2026';
-      const decoded = jwt.verify(token, jwtSecret);
+      const decoded = jwt.verify(token, getJwtSecret());
 
       // Get user from the token, exclude password
       req.user = await User.findById(decoded.id).select('-password');

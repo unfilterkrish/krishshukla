@@ -62,11 +62,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateUser = (updatedData) => {
-    setUser((prev) => ({ ...prev, ...updatedData }));
-    localStorage.setItem(
-      'prompt_vault_user',
-      JSON.stringify({ ...user, ...updatedData })
-    );
+    setUser((prev) => {
+      const nextUser = { ...prev, ...updatedData };
+      localStorage.setItem('prompt_vault_user', JSON.stringify(nextUser));
+      return nextUser;
+    });
   };
 
   const value = {

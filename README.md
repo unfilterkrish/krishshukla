@@ -118,12 +118,17 @@ PromptVaultAi/
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/promptvault
-JWT_SECRET=super_secret_jwt_key_prompt_vault_ai_secure_2026
+JWT_SECRET=replace_with_a_long_random_secret
 AI_API_KEY=your_gemini_or_openai_api_key_or_leave_empty_for_heuristic_engine
 NODE_ENV=development
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000
 ```
 
 *(Note: If you leave `AI_API_KEY` blank, the app will automatically use its built-in smart prompt engineering heuristics engine without throwing any errors!)*
+
+For production, set `CORS_ORIGINS` to the frontend's exact origin(s), comma-separated (scheme and host only). Local development allows HTTP origins on `localhost` and `127.0.0.1` across Vite ports. Set the frontend build variable `VITE_API_URL` to the backend API URL, including `/api` (for example, `https://api.example.com/api`). When `VITE_API_URL` is unset, local development uses the Vite `/api` proxy.
+
+For production, replace `JWT_SECRET` with a long, private random value and configure `MONGO_URI` to a persistent MongoDB deployment. The in-memory database is only used as a development/test fallback; the API will not start in production when its database or JWT secret is unavailable.
 
 ---
 
@@ -190,4 +195,3 @@ npm run dev
    - Profile management.
    - AI engine status monitor.
    - **1-Click Export Vault (JSON)**: Downloads complete prompt library for offline backups.
-

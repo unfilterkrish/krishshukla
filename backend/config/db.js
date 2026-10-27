@@ -13,11 +13,15 @@ const connectDB = async () => {
     console.log(`[Database] MongoDB Connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
-    console.warn(`[Database] Could not connect to primary MongoDB at ${uri}: ${error.message}`);
+    console.warn(`[Database] Could not connect to MongoDB: ${error.message}`);
+
+    if (process.env.NODE_ENV === 'production') {
+      throw error;
+    }
     
-    // In development or test, fall back to in-memory MongoDB if available
+    // Use an in-memory database only for local development and tests.
     try {
-      console.log('[Database] Starting MongoMemoryServer fallback for local development...');
+      console.log('[Database] Starting in-memory MongoDB for local development...');
       const { MongoMemoryServer } = require('mongodb-memory-server');
       mongod = await MongoMemoryServer.create();
       const memUri = mongod.getUri();
@@ -28,7 +32,7 @@ const connectDB = async () => {
     } catch (memErr) {
       console.error(`[Database] In-memory MongoDB failed to start: ${memErr.message}`);
       console.error('[Database] Please provide a valid MONGO_URI in backend/.env (e.g. MongoDB Atlas or local MongoDB service)');
-      throw error;
+      throw memErr;
     }
   }
 };

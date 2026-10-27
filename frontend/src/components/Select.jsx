@@ -19,19 +19,19 @@ const Select = ({
       {label && (
         <label
           htmlFor={selectId}
-          className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5"
+          className="block text-sm font-medium text-slate-700 mb-1.5"
         >
           {label} {required && <span className="text-purple-400">*</span>}
         </label>
       )}
-      <div className="relative rounded-xl shadow-sm">
+      <div className="relative">
         <select
           id={selectId}
-          className={`w-full appearance-none rounded-xl bg-slate-900/80 border ${
+          className={`w-full appearance-none rounded border bg-white ${
             error
               ? 'border-rose-500/80 focus:border-rose-500 focus:ring-rose-500/20'
               : 'border-slate-800 focus:border-purple-500 focus:ring-purple-500/25'
-          } px-4 py-2.5 pr-10 text-sm text-slate-100 transition-all focus:outline-none focus:ring-2 focus:bg-slate-900 cursor-pointer ${className}`}
+          } px-4 py-2.5 pr-10 text-sm text-slate-900 focus:outline-none cursor-pointer ${className}`}
           {...props}
         >
           {options.map((opt) => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Sparkles, User, Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
+import { Bookmark, User, Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import Button from '../components/Button';
@@ -63,52 +63,47 @@ const RegisterPage = () => {
     }
   };
 
-  const handleFillDemo = () => {
-    const randomSuffix = Math.floor(Math.random() * 900 + 100);
-    setFormData({
-      name: 'Alex Mercer',
-      email: `alex${randomSuffix}@promptvault.ai`,
-      password: 'password123',
-      confirmPassword: 'password123',
-    });
-    setError('');
-  };
-
   return (
-    <div className="min-h-screen bg-[#07090e] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/15 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-10 left-1/4 w-80 h-80 bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none" />
-
-      {/* Brand Header */}
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center relative z-10">
-        <Link to="/" className="inline-flex items-center gap-2.5 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-400 p-[1.5px] shadow-lg shadow-purple-600/30 group-hover:scale-105 transition-transform">
-            <div className="w-full h-full bg-[#07090e] rounded-[10px] flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-purple-400" />
-            </div>
+    <div className="min-h-screen bg-[#f4f0e8] text-[#252720] flex flex-col justify-center py-10 px-4 sm:px-6">
+      <main className="w-full max-w-5xl mx-auto grid md:grid-cols-[1fr_0.9fr] gap-10 md:gap-16 items-center">
+        <section className="max-w-md mx-auto md:mx-0">
+          <Link to="/" className="inline-flex items-center gap-2.5 group">
+            <span className="w-10 h-10 rounded-lg bg-[#2c332b] flex items-center justify-center text-[#f4f0e8]">
+              <Bookmark className="w-5 h-5" />
+            </span>
+            <span className="text-xl font-bold tracking-tight">
+              PromptVault <span className="text-[#ad5539]">AI</span>
+            </span>
+          </Link>
+          <p className="mt-14 text-xs font-semibold uppercase tracking-[0.18em] text-[#ad5539]">
+            Start with one good idea
+          </p>
+          <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.08]">
+            Make room for better prompts.
+          </h1>
+          <p className="mt-5 max-w-sm text-base leading-7 text-[#62665d]">
+            Create your own vault and keep the prompts, variations and little tweaks you want to use again.
+          </p>
+          <div className="mt-10 border-l-2 border-[#ad5539] pl-4 text-sm leading-6 text-[#62665d]">
+            No demo account needed. Sign up with your own email and password.
           </div>
-          <span className="text-2xl font-extrabold tracking-tight text-white">
-            PromptVault <span className="text-purple-400">AI</span>
-          </span>
-        </Link>
-        <h2 className="mt-5 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-          Create your vault account
-        </h2>
-        <p className="mt-2 text-xs sm:text-sm text-slate-400">
+        </section>
+
+        <section className="w-full max-w-md mx-auto">
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold tracking-tight">Create your account</h2>
+            <p className="mt-2 text-sm text-[#62665d]">
           Already have an account?{' '}
           <Link
             to="/login"
-            className="font-medium text-purple-400 hover:text-purple-300 underline underline-offset-4"
+            className="font-semibold text-[#ad5539] hover:text-[#8d422d] underline underline-offset-4"
           >
-            Sign in here
+            Sign in
           </Link>
-        </p>
-      </div>
+            </p>
+          </div>
 
-      {/* Register Card */}
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0 relative z-10">
-        <div className="bg-[#0d121f]/95 border border-slate-800/90 py-8 px-6 sm:px-10 shadow-2xl rounded-2xl backdrop-blur-xl">
+        <div className="bg-[#fffdfa] border border-[#e1dbcf] py-8 px-6 sm:px-9 shadow-[0_12px_36px_rgba(45,48,39,0.07)] rounded-xl">
           {error && (
             <div className="mb-5 p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-start gap-2.5">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-400" />
@@ -125,6 +120,8 @@ const RegisterPage = () => {
               required
               placeholder="e.g. Alex Mercer"
               icon={User}
+              labelClassName="!text-[#555a50]"
+              className="!bg-white !border-[#d8d3c8] !text-[#252720] placeholder:!text-[#96988f] focus:!border-[#ad5539] focus:!ring-[#ad5539]/20"
               value={formData.name}
               onChange={handleChange}
             />
@@ -138,6 +135,8 @@ const RegisterPage = () => {
               required
               placeholder="you@domain.com"
               icon={Mail}
+              labelClassName="!text-[#555a50]"
+              className="!bg-white !border-[#d8d3c8] !text-[#252720] placeholder:!text-[#96988f] focus:!border-[#ad5539] focus:!ring-[#ad5539]/20"
               value={formData.email}
               onChange={handleChange}
             />
@@ -150,13 +149,15 @@ const RegisterPage = () => {
               required
               placeholder="••••••••"
               icon={Lock}
+              labelClassName="!text-[#555a50]"
+              className="!bg-white !border-[#d8d3c8] !text-[#252720] placeholder:!text-[#96988f] focus:!border-[#ad5539] focus:!ring-[#ad5539]/20"
               value={formData.password}
               onChange={handleChange}
               rightElement={
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-slate-400 hover:text-slate-200"
+                  className="text-[#777b72] hover:text-[#252720]"
                 >
                   {showPassword ? (
                     <EyeOff className="w-4 h-4" />
@@ -175,6 +176,8 @@ const RegisterPage = () => {
               required
               placeholder="••••••••"
               icon={Lock}
+              labelClassName="!text-[#555a50]"
+              className="!bg-white !border-[#d8d3c8] !text-[#252720] placeholder:!text-[#96988f] focus:!border-[#ad5539] focus:!ring-[#ad5539]/20"
               value={formData.confirmPassword}
               onChange={handleChange}
             />
@@ -186,7 +189,7 @@ const RegisterPage = () => {
                 variant="primary"
                 size="lg"
                 loading={loading}
-                className="w-full font-bold shadow-lg shadow-purple-600/25"
+                className="w-full"
               >
                 <span>Create Account</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
@@ -194,19 +197,9 @@ const RegisterPage = () => {
             </div>
           </form>
 
-          {/* Quick autofill */}
-          <div className="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
-            <span className="text-slate-400">Quick Testing:</span>
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="text-cyan-400 hover:text-cyan-300 font-semibold underline underline-offset-2"
-            >
-              Fill Sample Credentials
-            </button>
-          </div>
         </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 };
